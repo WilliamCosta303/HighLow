@@ -42,8 +42,8 @@ public class Arquivo {
     }
     
     
-    public void salvarArquivo(String nomeArquivo, String conteudo){
-        try(PrintWriter writer = new PrintWriter("saves\\" + nomeArquivo + ".mmsv", "UTF-8")){
+    public void salvarArquivo(String arquivo, String conteudo){
+        try(PrintWriter writer = new PrintWriter(arquivo, "UTF-8")){
             BASE64Encoder BE = new BASE64Encoder();
             String valorCodificado = BE.encode(conteudo.getBytes());
             writer.println(valorCodificado);
@@ -53,12 +53,12 @@ public class Arquivo {
         }
     }
     
-    public String lerArquivo(String nomeArquivo) throws IOException{
+    public String lerArquivo(String arquivo) throws IOException{
         // Inicia uma String para ser o resultado
         String resultado;
         
         // Começa a leitura do arquivo
-        BufferedReader BR = new BufferedReader(new FileReader("saves\\" + nomeArquivo + ".mmsv"));
+        BufferedReader BR = new BufferedReader(new FileReader(arquivo));
         // Lê as linhas dos arquivo
         resultado = BR.readLine();
         

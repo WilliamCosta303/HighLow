@@ -3,13 +3,15 @@ package com.github.williamcosta303.visao;
 import javax.swing.JOptionPane;
 import com.github.williamcosta303.utilitarios.Arquivo;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Index extends javax.swing.JFrame {
 
     // Variáveis
     
-    int cartaAtual[] = {0,0}, cartaAnterior[] = {0,0}, dinheiro = 120, valorAposta = 20, dinheiroInimigo = geraNumeroAleatorio(50, 880), multiplicador = 2;
+    int cartaAtual[] = {0,0}, cartaAnterior[] = {0,0}, dinheiro = 120, valorAposta = 20, dinheiroInimigo = gerarDinheiroEstranho(), multiplicador = 2;
     String nomeSalvo = "";
     
     public Index() {
@@ -26,12 +28,12 @@ public class Index extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         lCartaAtual = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lCartaAnterior = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         bApostarMais = new javax.swing.JButton();
         bApostarMenos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -56,6 +58,8 @@ public class Index extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mAjudaSobre = new javax.swing.JMenuItem();
 
+        jFileChooser1.setCurrentDirectory(new java.io.File("C:\\Users\\william.cds\\Documents\\NetBeansProjects\\HighLow\\saves"));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Maior-Menor");
         setIconImage(Toolkit.getDefaultToolkit().getImage(Index.class.getResource("/com/github/williamcosta303/imagens/icone.png")));
@@ -79,13 +83,6 @@ public class Index extends javax.swing.JFrame {
 
         jLabel4.setText("Carta anterior:");
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,14 +99,12 @@ public class Index extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lCartaAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(107, 107, 107)
-                .addComponent(jButton1)
-                .addGap(121, 121, 121))
+                .addGap(301, 301, 301))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(66, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lCartaAnterior)
@@ -117,13 +112,8 @@ public class Index extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lCartaAtual))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lCartaAtual)
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
@@ -370,15 +360,6 @@ public class Index extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dinheiro = Integer.parseInt(JOptionPane.showInputDialog("Novo dinheiro:"));
-        this.dinheiroInimigo = Integer.parseInt(JOptionPane.showInputDialog("Novo dinheiro inimigo:"));
-        /*this.sorteiaUmaCarta(false);
-        System.out.println("SISTEMA:\n\nCarta atual:" + this.cartaAtual[0] + 
-                " / " + this.cartaAtual[1] + "\nCarta anterior: " + this.cartaAnterior[0] + 
-                " / " + this.cartaAnterior[1] + "\nDinheiro: " + this.dinheiro + "\nValor da aposta: " + this.valorAposta);*/
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         this.valorAposta = jSlider1.getValue();
     }//GEN-LAST:event_jSlider1StateChanged
@@ -478,7 +459,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.0 (build 161216.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.0 (build 161227.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -501,55 +482,67 @@ public class Index extends javax.swing.JFrame {
         8 - multiplicador
         */
         try{
-            //String nome = JOptionPane.showInputDialog(this, "Digite seu nome para salvar:", "SALVAR", JOptionPane.PLAIN_MESSAGE);
-            String nome = JOptionPane.showInputDialog("Digite seu nome para salvar:", nomeSalvo);
-            if(nome.length() > 0 && nome.length() < 50){
+            // Janela para salvar arquivo
+            File workingDirectory = new File(System.getProperty("user.dir") + "\\saves");
+            jFileChooser1.setCurrentDirectory(workingDirectory);
+            FileNameExtensionFilter filtroMMSV = new FileNameExtensionFilter("Saves Maior-menos (*.mmsv)", "mmsv");
+            jFileChooser1.addChoosableFileFilter(filtroMMSV);
+            jFileChooser1.setFileFilter(filtroMMSV);
+            
+            
+            this.jFileChooser1.showSaveDialog(this);
+
+            String tmp = this.jFileChooser1.getSelectedFile().getAbsolutePath();
+            if(!tmp.endsWith(".mmsv") && tmp.length() > 0){
+                tmp = tmp + ".mmsv";
+            }
+            
+            if(tmp.length() > 0){
                 Arquivo A = new Arquivo();
                 String conteudo = cartaAtual[0] + "," + cartaAtual[1] + "," + cartaAnterior[0] + "," + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + "," + multiplicador;
-                A.salvarArquivo(nome, conteudo);
-                nomeSalvo = nome;
+                A.salvarArquivo(tmp, conteudo);
                 JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
             }
-        }catch(NullPointerException NPE){
-            // SILENCIOSAMENTE CANCELA O SAVE
+        } catch(NullPointerException NPE){
+            // IGNORA SILENCIOSAMENTE O SAVE
         }
         
     }//GEN-LAST:event_mJogoSalvarActionPerformed
 
     private void mJogoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoAbrirActionPerformed
         try{
-            String nome = JOptionPane.showInputDialog(this, "Digite seu nome de jogo salvo:", "ABRIR", JOptionPane.PLAIN_MESSAGE);
-            if(nome.length() > 0 && nome.length() < 50){
-                Arquivo A = new Arquivo();
-                String conteudo[] = A.lerArquivo(nome).split(",");
-                
-                // Reseta as variáveis
-                cartaAtual[0] = Integer.parseInt(conteudo[0]);
-                cartaAtual[1] = Integer.parseInt(conteudo[1]);
-                cartaAnterior[0] = Integer.parseInt(conteudo[2]);
-                cartaAnterior[1] = Integer.parseInt(conteudo[3]);;
-                dinheiro = Integer.parseInt(conteudo[4]);
-                valorAposta = Integer.parseInt(conteudo[5]);
-                dinheiroInimigo = Integer.parseInt(conteudo[6]);
-                multiplicador = Integer.parseInt(conteudo[7]);
+            // Janela para abrir arquivo
+            File workingDirectory = new File(System.getProperty("user.dir") + "\\saves");
+            jFileChooser1.setCurrentDirectory(workingDirectory);
+            this.jFileChooser1.showOpenDialog(this);
+            
+            // Arquivo
+            Arquivo A = new Arquivo();
+            String conteudo[] = A.lerArquivo(jFileChooser1.getSelectedFile().getAbsolutePath()).split(",");
 
-                // Atualiza os componentes da janela
-                this.jSlider1.setValue(valorAposta);
-                this.lDinheiroAtual.setText(Integer.toString(dinheiro));
-                this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
-                this.lMultiplicador.setText(Integer.toString(multiplicador));
-                this.mEstranho.setText("Estranho:\nVoltou pra continuar perdendo? Por mim tudo bem.");
-                this.atualizarCartas();
-                
-                // Salva o nome salvo, caso o jogador queira salvar de novo
-                this.nomeSalvo = nome;
-                
-                JOptionPane.showMessageDialog(this, "Jogo carregado com sucesso!", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch(NullPointerException NPE){
-            // SILENCIOSAMENTE IGNORA O ERRO DO NOME
-        }catch(IOException IOE){
-            JOptionPane.showMessageDialog(this, "Save não encontrado", "ERRO - ABRIR", JOptionPane.ERROR_MESSAGE);
+            // Reseta as variáveis
+            cartaAtual[0] = Integer.parseInt(conteudo[0]);
+            cartaAtual[1] = Integer.parseInt(conteudo[1]);
+            cartaAnterior[0] = Integer.parseInt(conteudo[2]);
+            cartaAnterior[1] = Integer.parseInt(conteudo[3]);;
+            dinheiro = Integer.parseInt(conteudo[4]);
+            valorAposta = Integer.parseInt(conteudo[5]);
+            dinheiroInimigo = Integer.parseInt(conteudo[6]);
+            multiplicador = Integer.parseInt(conteudo[7]);
+
+            // Atualiza os componentes da janela
+            this.jSlider1.setValue(valorAposta);
+            this.lDinheiroAtual.setText(Integer.toString(dinheiro));
+            this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
+            this.lMultiplicador.setText(Integer.toString(multiplicador));
+            this.mEstranho.setText("Estranho:\nVoltou pra continuar perdendo? Por mim tudo bem.");
+            this.atualizarCartas();
+
+            JOptionPane.showMessageDialog(this, "Jogo carregado com sucesso!", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
+        } catch(IOException IOE){
+            JOptionPane.showMessageDialog(this, "Erro ao abrir o save!\nCausa: " + IOE.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(NullPointerException | NumberFormatException NPE){
+            JOptionPane.showMessageDialog(this, "Esse arquivo não é considerado um save válido!\nTente outro arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_mJogoAbrirActionPerformed
 
@@ -576,8 +569,11 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lCartaAtualMouseClicked
 
     private void lCartaAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCartaAnteriorMouseClicked
-        String nomeCarta = "";
+        String nomeCarta;// = "";
         switch (cartaAnterior[0]) {
+            case 0:
+                nomeCarta = "semcarta";
+                break;
             case 1:
                 nomeCarta = "Ás";
                 break;
@@ -594,7 +590,12 @@ public class Index extends javax.swing.JFrame {
                 nomeCarta = Integer.toString(cartaAnterior[0]);
                 break;
         }
-        this.mEstranho.setText("Estranho:\n" + nomeCarta + getNaipe(cartaAnterior[1], false) + " é passado, esqueça dessa carta.");
+        if(!nomeCarta.equals("semcarta")){
+            this.mEstranho.setText("Estranho:\n" + nomeCarta + getNaipe(cartaAnterior[1], false) + " é passado, esqueça dessa carta.");
+        } else{
+            this.mEstranho.setText("Estranho:\nAinda não começamos a jogar.");
+        }
+        
     }//GEN-LAST:event_lCartaAnteriorMouseClicked
 
     /**
@@ -726,7 +727,7 @@ public class Index extends javax.swing.JFrame {
         cartaAnterior[1] = 0;
         dinheiro = 120;
         valorAposta = 20;
-        dinheiroInimigo = geraNumeroAleatorio(50, 880);
+        dinheiroInimigo = gerarDinheiroEstranho();
         multiplicador = 2;
 
         // Atualiza os componentes da janela
@@ -866,11 +867,22 @@ public class Index extends javax.swing.JFrame {
         return mensagemFinal;
     }
     
+    private int gerarDinheiroEstranho(){
+        int valorFinal = this.geraNumeroAleatorio(1, 620);
+        if(valorFinal < 350){
+            do{
+                valorFinal+= this.geraNumeroAleatorio(1, 20);
+            }while(valorFinal < 350);
+        }
+        
+        return valorFinal;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bApostarMais;
     private javax.swing.JButton bApostarMenos;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
