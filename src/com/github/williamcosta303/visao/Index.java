@@ -2,10 +2,12 @@ package com.github.williamcosta303.visao;
 
 import javax.swing.JOptionPane;
 import com.github.williamcosta303.utilitarios.Arquivo;
+import com.github.williamcosta303.utilitarios.Estranho;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.*;
+//import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
     Copyright (c) 2016, William A. Costa
@@ -35,7 +37,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Index extends javax.swing.JFrame {
 
     // Variáveis
-    
+    Estranho E = new Estranho();
     int cartaAtual[] = {0,0}, cartaAnterior[] = {0,0}, dinheiro = 120, valorAposta = 20, dinheiroInimigo = gerarDinheiroEstranho(), multiplicador = 2;
     String nomeSalvo = "";
     
@@ -163,6 +165,11 @@ public class Index extends javax.swing.JFrame {
 
         lDinheiroAtual.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lDinheiroAtual.setText(Integer.toString(this.dinheiro));
+        lDinheiroAtual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lDinheiroAtualMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -231,7 +238,7 @@ public class Index extends javax.swing.JFrame {
         mEstranho.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         mEstranho.setLineWrap(true);
         mEstranho.setRows(3);
-        mEstranho.setText("Estranho:\nEntão você quer apostar? Vamos lá então.");
+        mEstranho.setText(E.geraFalaInicio());
         mEstranho.setWrapStyleWord(true);
         jScrollPane1.setViewportView(mEstranho);
 
@@ -397,7 +404,7 @@ public class Index extends javax.swing.JFrame {
             this.dinheiroInimigo -= this.valorAposta;
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(1));
+            this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -408,7 +415,7 @@ public class Index extends javax.swing.JFrame {
             this.dinheiroInimigo += this.valorAposta * multiplicador;
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(2));
+            this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -417,7 +424,7 @@ public class Index extends javax.swing.JFrame {
             // EMPATE
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(0));
+            this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -436,7 +443,7 @@ public class Index extends javax.swing.JFrame {
             this.dinheiroInimigo -= this.valorAposta;
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(1));
+            this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -447,7 +454,7 @@ public class Index extends javax.swing.JFrame {
             this.dinheiroInimigo += this.valorAposta * multiplicador;
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(2));
+            this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -456,7 +463,7 @@ public class Index extends javax.swing.JFrame {
             // EMPATE
             
             // Estranho
-            this.mEstranho.setText(this.geradorDeFalas(0));
+            this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
             
             // Mensagem
@@ -468,23 +475,23 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_bApostarMenosActionPerformed
 
     private void lMultiplicadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMultiplicadorMouseClicked
-        this.mEstranho.setText("Estranho:\nO multiplicador que você irá perder quando errar, pode deixar que eu cuido dele, hehe.");
+        this.mEstranho.setText(E.geraFalaGenerica("O multiplicador que você irá perder quando errar, pode deixar que eu cuido dele, hehe."));
     }//GEN-LAST:event_lMultiplicadorMouseClicked
 
     private void lDinheiroInimigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lDinheiroInimigoMouseClicked
         if(dinheiroInimigo > dinheiro){
-            this.mEstranho.setText("Estranho:\nMeu dinheiro, não se preocupe, deve estar sempre maior que o seu.");
+            this.mEstranho.setText(E.geraFalaGenerica("Meu dinheiro, não se preocupe, deve estar sempre maior que o seu!"));
         } else {
-            this.mEstranho.setText("Estranho:\nMeu dinheiro, não fique se achando, já me recupero.");
+            this.mEstranho.setText(E.geraFalaGenerica("Meu dinheiro, não fique se achando, já me recupero."));
         }
     }//GEN-LAST:event_lDinheiroInimigoMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        this.mEstranho.setText("Estranho:\nMeu lindo rosto. Eu deveria estar na televisão!");
+        this.mEstranho.setText(E.geraFalaGenerica("Meu lindo rosto, eu deveria estar na televisão!"));
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.0 (build 161227.2)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.1 (build 170116.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -505,6 +512,7 @@ public class Index extends javax.swing.JFrame {
         6 - valorAposta
         7 - dinheiroInimigo
         8 - multiplicador
+        9 - nome (Estranho)
         */
         try{
             // Janela para salvar arquivo
@@ -515,19 +523,25 @@ public class Index extends javax.swing.JFrame {
             jFileChooser1.setFileFilter(filtroMMSV);
             
             
-            this.jFileChooser1.showSaveDialog(this);
-
-            String tmp = this.jFileChooser1.getSelectedFile().getAbsolutePath();
-            if(!tmp.endsWith(".mmsv") && tmp.length() > 0){
-                tmp = tmp + ".mmsv";
-            }
+            int result = this.jFileChooser1.showSaveDialog(this);
             
-            if(tmp.length() > 0){
-                Arquivo A = new Arquivo();
-                String conteudo = cartaAtual[0] + "," + cartaAtual[1] + "," + cartaAnterior[0] + "," + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + "," + multiplicador;
-                A.salvarArquivo(tmp, conteudo);
-                JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
+            if(result == javax.swing.JFileChooser.APPROVE_OPTION){
+                String tmp = this.jFileChooser1.getSelectedFile().getAbsolutePath();
+                if(!tmp.endsWith(".mmsv") && tmp.length() > 0){
+                    tmp = tmp + ".mmsv";
+                }
+
+                if(tmp.length() > 0){
+                    Arquivo A = new Arquivo();
+                    String conteudo = cartaAtual[0] + "," + cartaAtual[1] + "," + cartaAnterior[0] + "," + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + "," + multiplicador + "," + E.getNome();
+                    A.salvarArquivo(tmp, conteudo);
+                    JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Cancelando save.", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
             }
+
+            
         } catch(NullPointerException NPE){
             // IGNORA SILENCIOSAMENTE O SAVE
         }
@@ -539,89 +553,70 @@ public class Index extends javax.swing.JFrame {
             // Janela para abrir arquivo
             File workingDirectory = new File(System.getProperty("user.dir") + "\\saves");
             jFileChooser1.setCurrentDirectory(workingDirectory);
-            this.jFileChooser1.showOpenDialog(this);
+            int result = this.jFileChooser1.showOpenDialog(this);
+           
+            if(result == javax.swing.JFileChooser.APPROVE_OPTION){
+                // Arquivo
+                Arquivo A = new Arquivo();
+                String conteudo[] = A.lerArquivo(jFileChooser1.getSelectedFile().getAbsolutePath()).split(",");
+
+                // Reseta as variáveis
+                cartaAtual[0] = Integer.parseInt(conteudo[0]);
+                cartaAtual[1] = Integer.parseInt(conteudo[1]);
+                cartaAnterior[0] = Integer.parseInt(conteudo[2]);
+                cartaAnterior[1] = Integer.parseInt(conteudo[3]);
+                dinheiro = Integer.parseInt(conteudo[4]);
+                valorAposta = Integer.parseInt(conteudo[5]);
+                dinheiroInimigo = Integer.parseInt(conteudo[6]);
+                multiplicador = Integer.parseInt(conteudo[7]);
+                E.setNome(conteudo[8]);
+
+                // Atualiza os componentes da janela
+                this.jSlider1.setValue(valorAposta);
+                this.lDinheiroAtual.setText(Integer.toString(dinheiro));
+                this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
+                this.lMultiplicador.setText(Integer.toString(multiplicador));
+                this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
+                this.atualizarCartas();
+
+                JOptionPane.showMessageDialog(this, "Jogo carregado com sucesso!", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cancelando carregamento.", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
+            }
             
-            // Arquivo
-            Arquivo A = new Arquivo();
-            String conteudo[] = A.lerArquivo(jFileChooser1.getSelectedFile().getAbsolutePath()).split(",");
-
-            // Reseta as variáveis
-            cartaAtual[0] = Integer.parseInt(conteudo[0]);
-            cartaAtual[1] = Integer.parseInt(conteudo[1]);
-            cartaAnterior[0] = Integer.parseInt(conteudo[2]);
-            cartaAnterior[1] = Integer.parseInt(conteudo[3]);;
-            dinheiro = Integer.parseInt(conteudo[4]);
-            valorAposta = Integer.parseInt(conteudo[5]);
-            dinheiroInimigo = Integer.parseInt(conteudo[6]);
-            multiplicador = Integer.parseInt(conteudo[7]);
-
+            
+        } catch(IOException IOE){
+            JOptionPane.showMessageDialog(this, "Erro ao abrir o save!\nCausa: " + IOE.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(NullPointerException | NumberFormatException NPE){
+            JOptionPane.showMessageDialog(this, "Esse arquivo não é considerado um save válido!\nTente outro arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch(ArrayIndexOutOfBoundsException AE){
             // Atualiza os componentes da janela
             this.jSlider1.setValue(valorAposta);
             this.lDinheiroAtual.setText(Integer.toString(dinheiro));
             this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
             this.lMultiplicador.setText(Integer.toString(multiplicador));
-            this.mEstranho.setText("Estranho:\nVoltou pra continuar perdendo? Por mim tudo bem.");
+            this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
             this.atualizarCartas();
-
-            JOptionPane.showMessageDialog(this, "Jogo carregado com sucesso!", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
-        } catch(IOException IOE){
-            JOptionPane.showMessageDialog(this, "Erro ao abrir o save!\nCausa: " + IOE.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        } catch(NullPointerException | NumberFormatException NPE){
-            JOptionPane.showMessageDialog(this, "Esse arquivo não é considerado um save válido!\nTente outro arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+            JOptionPane.showMessageDialog(this, "Save antigo detectado!\nSeu jogo foi importado, da próxima vez que salvar ele será atualizado para a nova versão!", "AVISO", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_mJogoAbrirActionPerformed
 
     private void lCartaAtualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCartaAtualMouseClicked
-        String nomeCarta = "";
-        switch (cartaAtual[0]) {
-            case 1:
-                nomeCarta = "Ás";
-                break;
-            case 11:
-                nomeCarta = "Valete";
-                break;
-            case 12:
-                nomeCarta = "Rainha";
-                break;
-            case 13:
-                nomeCarta = "Rei";
-                break;
-            default:
-                nomeCarta = Integer.toString(cartaAtual[0]);
-                break;
-        }
-        this.mEstranho.setText("Estranho:\nHmm? " + nomeCarta + getNaipe(cartaAtual[1], false) + "? É a carta atual, o que tem?");
+        this.mEstranho.setText(E.geraFalaCartaAtual(cartaAtual[0], cartaAtual[1], this.multiplicador));
     }//GEN-LAST:event_lCartaAtualMouseClicked
 
     private void lCartaAnteriorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lCartaAnteriorMouseClicked
-        String nomeCarta;// = "";
-        switch (cartaAnterior[0]) {
-            case 0:
-                nomeCarta = "semcarta";
-                break;
-            case 1:
-                nomeCarta = "Ás";
-                break;
-            case 11:
-                nomeCarta = "Valete";
-                break;
-            case 12:
-                nomeCarta = "Rainha";
-                break;
-            case 13:
-                nomeCarta = "Rei";
-                break;
-            default:
-                nomeCarta = Integer.toString(cartaAnterior[0]);
-                break;
+        if(cartaAnterior[0] != 0){
+            this.mEstranho.setText(E.geraFalaCartaAnterior(cartaAnterior[0], cartaAnterior[1], this.multiplicador));
+        } else {
+            this.mEstranho.setText(E.geraFalaGenerica("Ainda não começamos a jogar."));
         }
-        if(!nomeCarta.equals("semcarta")){
-            this.mEstranho.setText("Estranho:\n" + nomeCarta + getNaipe(cartaAnterior[1], false) + " é passado, esqueça dessa carta.");
-        } else{
-            this.mEstranho.setText("Estranho:\nAinda não começamos a jogar.");
-        }
-        
     }//GEN-LAST:event_lCartaAnteriorMouseClicked
+
+    private void lDinheiroAtualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lDinheiroAtualMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lDinheiroAtualMouseClicked
 
     /**
      * @param args the command line arguments
@@ -662,6 +657,13 @@ public class Index extends javax.swing.JFrame {
         int cartaGerada = geraNumeroAleatorio(1, 13);
         int naipeGerado = geraNumeroAleatorio(1, 4);
         
+        // Evita que a carta sorteada seja igual a anterior
+        if(cartaGerada == cartaAtual[0] && naipeGerado == cartaAtual[1]){
+            do{
+                naipeGerado = geraNumeroAleatorio(1, 4);
+            }while(naipeGerado == cartaAtual[1]);
+        }
+        
         // Salva a carta anterior em seu lugar
         this.cartaAnterior[0] = cartaAtual[0];
         this.cartaAnterior[1] = cartaAtual[1];
@@ -671,24 +673,15 @@ public class Index extends javax.swing.JFrame {
         this.cartaAtual[1] = naipeGerado;
         
         if(inicioPartida){
-            lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAtual[1], true) + "-" + cartaAtual[0] + ".png")));
+            lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAtual[1]) + "-" + cartaAtual[0] + ".png")));
         } else {
             this.atualizarCartas();
         }
-        
-        /*int cartaGerada = geraNumeroAleatorio(1, 13);
-        String cartaAnteriorTexto = lCartaAtual.getIcon().toString().split("classes")[1];
-        System.out.println("Carta gerada: " + cartaGerada + "\nCarta anterior:" + cartaAnteriorTexto);
-        lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(geraNumeroAleatorio(1, 4)) + "-" + cartaGerada + ".png")));
-        lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource(cartaAnteriorTexto)));
-        /*
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/copa-1.png"))); // NOI18N
-        */
     }
     
     private void atualizarCartas(){
-        lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAnterior[1], true) + "-" + cartaAnterior[0] + ".png")));
-        lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAtual[1], true) + "-" + cartaAtual[0] + ".png")));
+        lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAnterior[1]) + "-" + cartaAnterior[0] + ".png")));
+        lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAtual[1]) + "-" + cartaAtual[0] + ".png")));
     }
     
     private void atualizarDinheiros(){
@@ -696,36 +689,20 @@ public class Index extends javax.swing.JFrame {
         this.lDinheiroInimigo.setText(Integer.toString(this.dinheiroInimigo));
     }
     
-    private String getNaipe(int codigo, boolean isCodigo){
+    private String getNaipe(int codigo){
         String resultado;
         switch(codigo){
             case 1:
-                if(isCodigo){
-                    resultado = "ouro";
-                } else {
-                    resultado = " de ouros";
-                }
+                resultado = "ouro";
                 break;
             case 2:
-                if(isCodigo){
-                    resultado = "paus";
-                } else {
-                    resultado = " de paus";
-                }
+                resultado = "paus";
                 break;
             case 3:
-                if(isCodigo){
-                    resultado = "espa";
-                } else {
-                    resultado = " de espadas";
-                }
+                resultado = "espa";
                 break;
             case 4:
-                if(isCodigo){
-                    resultado = "copa";
-                } else {
-                    resultado = " de copas";
-                }
+                resultado = "copa";
                 break;
             default:
                 resultado = "bugou pra caralho";
@@ -760,7 +737,7 @@ public class Index extends javax.swing.JFrame {
         this.lDinheiroAtual.setText(Integer.toString(dinheiro));
         this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
         this.lMultiplicador.setText(Integer.toString(multiplicador));
-        this.mEstranho.setText("Estranho:\nEntão você quer apostar? Vamos lá então.");
+        this.mEstranho.setText(E.geraFalaInicio());
 
         // Reseta o ícone da carta anterior
         lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/none.png")));
@@ -786,110 +763,24 @@ public class Index extends javax.swing.JFrame {
         if(dinheiro > dinheiroInimigo && multiplicador >= 2){
             if((dinheiroInimigo > 120 && dinheiroInimigo < 250) && multiplicador == 2){
                 multiplicador = 3;
-                this.mEstranho.setText("Estranho:\nHora de mudar esse multiplicador!\nO triplo ou nada!");
+                this.mEstranho.setText(E.geraFalaGenerica("Hora de mudar esse multiplicador!\nO triplo ou nada!"));
             } else if(dinheiroInimigo <= 120 && (multiplicador == 2 || multiplicador == 3)){
                 multiplicador = 4;
-                this.mEstranho.setText("Escute aqui, eu faço as regras aqui! Quádruplo ou você está fora! E NÃO ESTOU NERVOSO!");
+                this.mEstranho.setText(E.geraFalaGenerica("Escute aqui, eu faço as regras aqui! Quádruplo ou você está fora! E NÃO ESTOU NERVOSO!"));
             }
             this.lMultiplicador.setText(Integer.toString(multiplicador));
         }
         if(dinheiroInimigo > dinheiro && multiplicador != 2){
             if((dinheiroInimigo >= 120 && dinheiroInimigo < 250) && multiplicador == 4){
                 multiplicador = 3;
-                this.mEstranho.setText("Haha, está tão mal assim? Vou lhe dar uma colher de chá!");
+                this.mEstranho.setText(E.geraFalaGenerica("Haha, está tão mal assim? Vou lhe dar uma colher de chá!"));
             } else if(dinheiroInimigo >= 250 && (multiplicador == 3 || multiplicador == 4)){
                 multiplicador = 2;
-                this.mEstranho.setText("Como estou na vantagem, vou lhe dar a vantagem de mudar o multiplicador!");
+                this.mEstranho.setText(E.geraFalaGenerica("Como estou na vantagem, vou lhe dar a vantagem de mudar o multiplicador!"));
             }
             this.lMultiplicador.setText(Integer.toString(multiplicador));
         }
         
-    }
-    
-    private String geradorDeFalas(int tipo){
-        int mensagemEscolhida = geraNumeroAleatorio(1, 7);
-        String mensagemFinal = "Estranho:\n";
-        switch(tipo){
-            case 1:
-                // VITÓRIA JOGADOR
-                switch(mensagemEscolhida){
-                    case 1:
-                        mensagemFinal += "Você deu sorte dessa vez!";
-                        break;
-                    case 2:
-                        mensagemFinal += "Não vá se acostumando!";
-                        break;
-                    case 3:
-                        mensagemFinal += "Mas que sorte a sua!";
-                        break;
-                    case 4:
-                        mensagemFinal += "Dona sorte sorriu pra você!";
-                        break;
-                    case 5:
-                        mensagemFinal += "Droga!";
-                        break;
-                    case 6:
-                        mensagemFinal += "Grrrr!";
-                        break;
-                    default:
-                        mensagemFinal += "Você ganhou só dessa vez!";
-                        break;
-                }
-                break;
-            case 2:
-                // DERROTA JOGADOR
-                switch(mensagemEscolhida){
-                    case 1:
-                        mensagemFinal += "Já estou acostumado!";
-                        break;
-                    case 2:
-                        mensagemFinal += "A sorte sorri pra mim novamente!";
-                        break;
-                    case 3:
-                        mensagemFinal += "Mas que sorte!";
-                        break;
-                    case 4:
-                        mensagemFinal += "Apenas mais uma vitória!";
-                        break;
-                    case 5:
-                        mensagemFinal += "Yes!";
-                        break;
-                    case 6:
-                        mensagemFinal += "Não seria melhor você desistir?";
-                        break;
-                    default:
-                        mensagemFinal += "Como todas as outras vezes!";
-                        break;
-                }
-                break;
-            default:
-                // EMPATE
-                switch(mensagemEscolhida){
-                    case 1:
-                        mensagemFinal += "Quem diria!";
-                        break;
-                    case 2:
-                        mensagemFinal += "A mesma carta!";
-                        break;
-                    case 3:
-                        mensagemFinal += "Raro de acontecer!";
-                        break;
-                    case 4:
-                        mensagemFinal += "Nem sempre a sorte sorri!";
-                        break;
-                    case 5:
-                        mensagemFinal += "Quê?";
-                        break;
-                    case 6:
-                        mensagemFinal += "Quais as chances?";
-                        break;
-                    default:
-                        mensagemFinal += "Interessante.";
-                        break;
-                }
-                break;
-        }
-        return mensagemFinal;
     }
     
     private int gerarDinheiroEstranho(){
