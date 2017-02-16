@@ -59,8 +59,15 @@ public class Arquivo {
         
         // Começa a leitura do arquivo
         BufferedReader BR = new BufferedReader(new FileReader(arquivo));
-        // Lê as linhas dos arquivo
-        resultado = BR.readLine();
+        
+        // Lê TODAS as linhas do arquivo
+        StringBuilder everything = new StringBuilder();
+        while( (resultado = BR.readLine()) != null) {
+           everything.append(resultado);
+        }
+        
+        // Seta a resultado como o valor completo obtido do arquivo
+        resultado = everything.toString();
         
         // Inicia o decodificador
         BASE64Decoder BD = new BASE64Decoder();

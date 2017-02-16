@@ -6,6 +6,8 @@ import com.github.williamcosta303.utilitarios.Estranho;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.filechooser.*;
 //import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -41,6 +43,12 @@ public class Index extends javax.swing.JFrame {
     int cartaAtual[] = {0,0}, cartaAnterior[] = {0,0}, dinheiro = 120, valorAposta = 20, dinheiroInimigo = gerarDinheiroEstranho(), multiplicador = 2;
     String nomeSalvo = "";
     
+    // Conquistas
+    boolean manteveApostaOriginal = true;
+    boolean perdeuUmaAposta = false;
+    int vitoriasSeguidas = 0;
+    int cliquesNoRosto = 0;
+    
     public Index() {
         initComponents();
         this.sorteiaUmaCarta(true);
@@ -56,20 +64,20 @@ public class Index extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
-        jPanel1 = new javax.swing.JPanel();
+        painelCartas = new javax.swing.JPanel();
         lCartaAtual = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lCartaAnterior = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        bApostarMais = new javax.swing.JButton();
-        bApostarMenos = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        painelDinheiro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lDinheiroAtual = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
-        jPanel3 = new javax.swing.JPanel();
+        painelEstranho = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mEstranho = new javax.swing.JTextArea();
@@ -77,6 +85,12 @@ public class Index extends javax.swing.JFrame {
         lDinheiroInimigo = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         lMultiplicador = new javax.swing.JLabel();
+        bApostarMais = new javax.swing.JButton();
+        bApostarMenos = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tConquistas = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mJogoNovo = new javax.swing.JMenuItem();
@@ -110,55 +124,39 @@ public class Index extends javax.swing.JFrame {
 
         jLabel4.setText("Carta anterior:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelCartasLayout = new javax.swing.GroupLayout(painelCartas);
+        painelCartas.setLayout(painelCartasLayout);
+        painelCartasLayout.setHorizontalGroup(
+            painelCartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCartasLayout.createSequentialGroup()
+                .addGroup(painelCartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelCartasLayout.createSequentialGroup()
                         .addGap(214, 214, 214)
                         .addComponent(lCartaAnterior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(painelCartasLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(painelCartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lCartaAtual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(301, 301, 301))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        painelCartasLayout.setVerticalGroup(
+            painelCartasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCartasLayout.createSequentialGroup()
                 .addContainerGap(66, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lCartaAnterior)
                 .addGap(34, 34, 34))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(painelCartasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lCartaAtual)
                 .addContainerGap(89, Short.MAX_VALUE))
         );
-
-        bApostarMais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/aposta-mais.png"))); // NOI18N
-        bApostarMais.setText("Apostar mais");
-        bApostarMais.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bApostarMaisActionPerformed(evt);
-            }
-        });
-
-        bApostarMenos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/aposta-menos.png"))); // NOI18N
-        bApostarMenos.setText("Apostar menos");
-        bApostarMenos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bApostarMenosActionPerformed(evt);
-            }
-        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Dinheiro atual");
@@ -192,15 +190,15 @@ public class Index extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelDinheiroLayout = new javax.swing.GroupLayout(painelDinheiro);
+        painelDinheiro.setLayout(painelDinheiroLayout);
+        painelDinheiroLayout.setHorizontalGroup(
+            painelDinheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDinheiroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelDinheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelDinheiroLayout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lDinheiroAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,20 +206,20 @@ public class Index extends javax.swing.JFrame {
                     .addComponent(jSlider1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        painelDinheiroLayout.setVerticalGroup(
+            painelDinheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDinheiroLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelDinheiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lDinheiroAtual)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/shadyguy.png"))); // NOI18N
@@ -267,20 +265,20 @@ public class Index extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelEstranhoLayout = new javax.swing.GroupLayout(painelEstranho);
+        painelEstranho.setLayout(painelEstranhoLayout);
+        painelEstranhoLayout.setHorizontalGroup(
+            painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelEstranhoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(painelEstranhoLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lMultiplicador, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(painelEstranhoLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lDinheiroInimigo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -288,25 +286,134 @@ public class Index extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        painelEstranhoLayout.setVerticalGroup(
+            painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelEstranhoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelEstranhoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lDinheiroInimigo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(painelEstranhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lMultiplicador))
                         .addGap(13, 13, 13))
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        bApostarMais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/aposta-mais.png"))); // NOI18N
+        bApostarMais.setText("Apostar mais");
+        bApostarMais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bApostarMaisActionPerformed(evt);
+            }
+        });
+
+        bApostarMenos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/aposta-menos.png"))); // NOI18N
+        bApostarMenos.setText("Apostar menos");
+        bApostarMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bApostarMenosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bApostarMais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bApostarMenos, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(painelEstranho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(painelEstranho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(bApostarMais)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bApostarMenos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Jogo", jPanel1);
+
+        tConquistas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Alguns nascem com sorte", "Ganhe cinco apostas seguidas", "-"},
+                {"Confio no que tenho", "Ganhe uma partida sem alterar o valor da aposta", "-"},
+                {"Casado com a sorte", "Ganhe uma partida sem perder uma aposta", "-"},
+                {"Ator da televisão", "BLOQUEADO", "-"},
+                {"Nem começou ainda", "BLOQUEADO", "-"}
+            },
+            new String [] {
+                "Nome", "Descrição", "Obtido em"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tConquistas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tConquistas);
+        if (tConquistas.getColumnModel().getColumnCount() > 0) {
+            tConquistas.getColumnModel().getColumn(0).setResizable(false);
+            tConquistas.getColumnModel().getColumn(1).setResizable(false);
+            tConquistas.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jButton1.setText("Ver conquista");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Conquitas", jPanel2);
 
         jMenu1.setText("Jogo");
 
@@ -359,33 +466,17 @@ public class Index extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bApostarMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bApostarMais, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(painelCartas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelCartas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bApostarMais)
-                        .addGap(18, 18, 18)
-                        .addComponent(bApostarMenos)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jTabbedPane1))
         );
 
         pack();
@@ -394,6 +485,7 @@ public class Index extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         this.valorAposta = jSlider1.getValue();
+        this.manteveApostaOriginal = false;
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void bApostarMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bApostarMaisActionPerformed
@@ -402,6 +494,9 @@ public class Index extends javax.swing.JFrame {
             // GANHOU
             this.dinheiro += this.valorAposta;
             this.dinheiroInimigo -= this.valorAposta;
+            
+            // Conquistas
+            this.vitoriasSeguidas++;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
@@ -414,6 +509,10 @@ public class Index extends javax.swing.JFrame {
             this.dinheiro -= this.valorAposta * multiplicador;
             this.dinheiroInimigo += this.valorAposta * multiplicador;
             
+            // Conquistas
+            this.vitoriasSeguidas = 0;
+            this.perdeuUmaAposta = true;
+            
             // Estranho
             this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
@@ -422,6 +521,7 @@ public class Index extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Errou, você perdeu $" + (this.valorAposta * multiplicador) + "!", "DERROTA", JOptionPane.ERROR_MESSAGE);
         } else {
             // EMPATE
+            this.vitoriasSeguidas = 0;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
@@ -430,6 +530,9 @@ public class Index extends javax.swing.JFrame {
             // Mensagem
             JOptionPane.showMessageDialog(this, "Empate, não há modificação no seu dinheiro!", "VITÓRIA", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        // Conquistas
+        this.verificaVitoriasSeguidas();
         
         this.atualizarDinheiros();
         this.verificaVitoria();
@@ -442,6 +545,9 @@ public class Index extends javax.swing.JFrame {
             this.dinheiro += this.valorAposta;
             this.dinheiroInimigo -= this.valorAposta;
             
+            // Conquistas
+            this.vitoriasSeguidas++;
+            
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
@@ -453,6 +559,10 @@ public class Index extends javax.swing.JFrame {
             this.dinheiro -= this.valorAposta * multiplicador;
             this.dinheiroInimigo += this.valorAposta * multiplicador;
             
+            // Conquistas
+            this.vitoriasSeguidas = 0;
+            this.perdeuUmaAposta = true;
+            
             // Estranho
             this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
@@ -461,6 +571,7 @@ public class Index extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Errou, você perdeu $" + (this.valorAposta * multiplicador) + "!", "DERROTA", JOptionPane.ERROR_MESSAGE);
         } else {
             // EMPATE
+            this.vitoriasSeguidas = 0;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
@@ -469,6 +580,9 @@ public class Index extends javax.swing.JFrame {
             // Mensagem
             JOptionPane.showMessageDialog(this, "Empate, não há modificação no seu dinheiro!", "VITÓRIA", JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        // Conquistas
+        this.verificaVitoriasSeguidas();
         
         this.atualizarDinheiros();
         this.verificaVitoria();
@@ -487,32 +601,45 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lDinheiroInimigoMouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        this.mEstranho.setText(E.geraFalaGenerica("Meu lindo rosto, eu deveria estar na televisão!"));
+        if(this.cliquesNoRosto == 6 && this.tConquistas.getValueAt(3, 2).equals("-")){
+            this.mEstranho.setText(E.geraFalaGenerica("Eu sei, meu rosto é irresistível!"));
+            JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\n\nATOR DA TELEVISÃO!\n- Clique no rosto do inimigo sete vezes!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+            this.tConquistas.setValueAt("Clique no rosto do inimigo sete vezes", 3, 1);
+            this.tConquistas.setValueAt(this.recebeHorario(), 3, 2);
+        } else {
+            this.mEstranho.setText(E.geraFalaGenerica("Meu lindo rosto, eu deveria estar na televisão!"));
+            this.cliquesNoRosto++;
+        }
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.1 (build 170116.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170216.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
-        int confirma = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja iniciar um novo jogo?\nISSO APAGARÁ TUDO DO JOGO ATUAL!", "CONFIRMAÇÃO", JOptionPane.YES_NO_OPTION);
+        int confirma = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja iniciar um novo jogo?\nISSO APAGARÁ TUDO DO JOGO ATUAL!\n(INCLUINDO AS CONQUISTAS!!!)", "CONFIRMAÇÃO", JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
-            this.iniciarNovoJogo();
+            this.iniciarNovoJogo(false);
         }
     }//GEN-LAST:event_mJogoNovoActionPerformed
 
     private void mJogoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoSalvarActionPerformed
         /*
         Ordem:
-        1 - cartaAtual[0]
-        2 - cartaAtual[1]
-        3 - cartaAnterior[0]
-        4 - cartaAnterior[1]
-        5 - dinheiro
-        6 - valorAposta
-        7 - dinheiroInimigo
-        8 - multiplicador
-        9 - nome (Estranho)
+        01 - cartaAtual[0]
+        02 - cartaAtual[1]
+        03 - cartaAnterior[0]
+        04 - cartaAnterior[1]
+        05 - dinheiro
+        06 - valorAposta
+        07 - dinheiroInimigo
+        08 - multiplicador
+        09 - nome (Estranho)
+        10 - Horário conquista 1 (Alguns nascem com sorte)
+        11 - Horário conquista 2 (Confio no que tenho)
+        12 - Horário conquista 3 (Casado com a sorte)
+        13 - Horário conquista 4 (Ator da televisão)
+        14 - Horário conquista 5 (Nem começou ainda)
         */
         try{
             // Janela para salvar arquivo
@@ -533,7 +660,11 @@ public class Index extends javax.swing.JFrame {
 
                 if(tmp.length() > 0){
                     Arquivo A = new Arquivo();
-                    String conteudo = cartaAtual[0] + "," + cartaAtual[1] + "," + cartaAnterior[0] + "," + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + "," + multiplicador + "," + E.getNome();
+                    String conteudo = cartaAtual[0] + "," + cartaAtual[1] + "," + cartaAnterior[0] + ","
+                            + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + ","
+                            + multiplicador + "," + E.getNome() + "," + tConquistas.getValueAt(0, 2) + ","
+                            + tConquistas.getValueAt(1, 2) + "," + tConquistas.getValueAt(2, 2) + ","
+                            + tConquistas.getValueAt(3, 2) + "," + tConquistas.getValueAt(4, 2);
                     A.salvarArquivo(tmp, conteudo);
                     JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -559,7 +690,7 @@ public class Index extends javax.swing.JFrame {
                 // Arquivo
                 Arquivo A = new Arquivo();
                 String conteudo[] = A.lerArquivo(jFileChooser1.getSelectedFile().getAbsolutePath()).split(",");
-
+                
                 // Reseta as variáveis
                 cartaAtual[0] = Integer.parseInt(conteudo[0]);
                 cartaAtual[1] = Integer.parseInt(conteudo[1]);
@@ -570,7 +701,20 @@ public class Index extends javax.swing.JFrame {
                 dinheiroInimigo = Integer.parseInt(conteudo[6]);
                 multiplicador = Integer.parseInt(conteudo[7]);
                 E.setNome(conteudo[8]);
-
+                
+                // Atualiza as conquistas
+                this.tConquistas.setValueAt(conteudo[9], 0, 2);
+                this.tConquistas.setValueAt(conteudo[10], 1, 2);
+                this.tConquistas.setValueAt(conteudo[11], 2, 2);
+                this.tConquistas.setValueAt(conteudo[12], 3, 2);
+                if(!conteudo[12].equals("-")){
+                    this.tConquistas.setValueAt("Clique no rosto do inimigo sete vezes", 3, 1);
+                }
+                this.tConquistas.setValueAt(conteudo[13], 4, 2);
+                if(!conteudo[13].equals("-")){
+                    this.tConquistas.setValueAt("Clique na carta anterior antes do jogo começar", 4, 1);
+                }
+                
                 // Atualiza os componentes da janela
                 this.jSlider1.setValue(valorAposta);
                 this.lDinheiroAtual.setText(Integer.toString(dinheiro));
@@ -611,12 +755,22 @@ public class Index extends javax.swing.JFrame {
             this.mEstranho.setText(E.geraFalaCartaAnterior(cartaAnterior[0], cartaAnterior[1], this.multiplicador));
         } else {
             this.mEstranho.setText(E.geraFalaGenerica("Ainda não começamos a jogar."));
+            if(this.tConquistas.getValueAt(4, 2).equals("-")){
+                JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nNEM COMEÇOU AINDA!\n- Clique na carta anterior antes do jogo começar!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+                this.tConquistas.setValueAt("Clique na carta anterior antes do jogo começar", 4, 1);
+                this.tConquistas.setValueAt(this.recebeHorario(), 4, 2);
+            }
         }
     }//GEN-LAST:event_lCartaAnteriorMouseClicked
 
     private void lDinheiroAtualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lDinheiroAtualMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_lDinheiroAtualMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //this.dinheiroInimigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo valor de dinheiro do inimigo:", Integer.toString(this.dinheiroInimigo)));
+        System.out.println("Estado das suas conquistas:\n\nPerdeu aposta? - " + this.perdeuUmaAposta + "\nManteve a aposta de $20? - " + this.manteveApostaOriginal + "\nCliques na cara do estranho: " + this.cliquesNoRosto + "\nVitórias seguidas: " + this.vitoriasSeguidas);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -680,7 +834,11 @@ public class Index extends javax.swing.JFrame {
     }
     
     private void atualizarCartas(){
-        lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAnterior[1]) + "-" + cartaAnterior[0] + ".png")));
+        if(cartaAnterior[1] != 0){
+            lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAnterior[1]) + "-" + cartaAnterior[0] + ".png")));
+        } else {
+            lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/none.png")));
+        }
         lCartaAtual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/" + getNaipe(cartaAtual[1]) + "-" + cartaAtual[0] + ".png")));
     }
     
@@ -714,14 +872,22 @@ public class Index extends javax.swing.JFrame {
     private void verificaVitoria(){
         if(dinheiroInimigo <= 0){
             JOptionPane.showMessageDialog(this, "Você ganhou!\nFicou com todo o dinheiro do estranho.\n\nSeu saldo final: $" + dinheiro + "\nSaldo final do estranho: $" + dinheiroInimigo, "VOCÊ VENCEU", JOptionPane.INFORMATION_MESSAGE);
-            this.iniciarNovoJogo();
+            if(this.manteveApostaOriginal && this.tConquistas.getValueAt(1, 2).equals("-")){
+                JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nCONFIO NO QUE TENHO!\n- Ganhe uma partida sem alterar o valor da aposta!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+                this.tConquistas.setValueAt(this.recebeHorario(), 1, 2);
+            }
+            if(!this.perdeuUmaAposta && this.tConquistas.getValueAt(2, 2).equals("-")){
+                JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nCASADO COM A SORTE!\n- Ganhe uma partida sem perder uma aposta!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+                this.tConquistas.setValueAt(this.recebeHorario(), 2, 2);
+            }
+            this.iniciarNovoJogo(true);
         } else if(dinheiro <= 0){
             JOptionPane.showMessageDialog(this, "Você perdeu!\nO estranho ficou com todo o seu dinheiro.\n\nSeu saldo final: $" + dinheiro + "\nSaldo final do estranho: $" + dinheiroInimigo, "VOCÊ PERDEU", JOptionPane.WARNING_MESSAGE);
-            this.iniciarNovoJogo();
+            this.iniciarNovoJogo(true);
         }
     }
     
-    private void iniciarNovoJogo(){
+    private void iniciarNovoJogo(boolean acabouJogoAnterior){
         // Reseta as variáveis
         cartaAtual[0] = 0;
         cartaAtual[1] = 0;
@@ -731,6 +897,18 @@ public class Index extends javax.swing.JFrame {
         valorAposta = 20;
         dinheiroInimigo = gerarDinheiroEstranho();
         multiplicador = 2;
+        
+        // Reseta as conquistas
+        this.manteveApostaOriginal = true;
+        this.perdeuUmaAposta = false;
+        this.vitoriasSeguidas = 0;
+        if(!acabouJogoAnterior){
+            this.tConquistas.setValueAt("-", 0, 2);
+            this.tConquistas.setValueAt("-", 1, 2);
+            this.tConquistas.setValueAt("-", 2, 2);
+            this.tConquistas.setValueAt("-", 3, 2);
+            this.tConquistas.setValueAt("-", 4, 2);
+        }
 
         // Atualiza os componentes da janela
         this.jSlider1.setValue(valorAposta);
@@ -785,19 +963,36 @@ public class Index extends javax.swing.JFrame {
     
     private int gerarDinheiroEstranho(){
         int valorFinal = this.geraNumeroAleatorio(1, 620);
-        if(valorFinal < 350){
+        if(valorFinal < 200){
             do{
                 valorFinal+= this.geraNumeroAleatorio(1, 20);
-            }while(valorFinal < 350);
+            }while(valorFinal < 200);
         }
         
         return valorFinal;
+    }
+    
+    /*
+        Métodos das conquistas
+    */
+    
+    private void verificaVitoriasSeguidas(){
+        if(vitoriasSeguidas == 5 && this.tConquistas.getValueAt(0, 2).equals("-")){
+            JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nALGUNS NASCEM COM SORTE!\n- Ganhe cinco apostas seguidas!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+            this.tConquistas.setValueAt(this.recebeHorario(), 0, 2);
+        }
+    }
+    
+    
+    private String recebeHorario(){
+        return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
     }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bApostarMais;
     private javax.swing.JButton bApostarMenos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -812,9 +1007,10 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lCartaAnterior;
     private javax.swing.JLabel lCartaAtual;
     private javax.swing.JLabel lDinheiroAtual;
@@ -825,5 +1021,9 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JMenuItem mJogoAbrir;
     private javax.swing.JMenuItem mJogoNovo;
     private javax.swing.JMenuItem mJogoSalvar;
+    private javax.swing.JPanel painelCartas;
+    private javax.swing.JPanel painelDinheiro;
+    private javax.swing.JPanel painelEstranho;
+    private javax.swing.JTable tConquistas;
     // End of variables declaration//GEN-END:variables
 }
