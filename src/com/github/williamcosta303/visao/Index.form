@@ -548,13 +548,15 @@
                 <Component class="javax.swing.JTable" name="tConquistas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="5">
+                      <Table columnCount="3" rowCount="7">
                         <Column editable="false" title="Nome" type="java.lang.Object">
                           <Data value="Alguns nascem com sorte"/>
                           <Data value="Confio no que tenho"/>
                           <Data value="Casado com a sorte"/>
                           <Data value="Ator da televis&#xe3;o"/>
                           <Data value="Nem come&#xe7;ou ainda"/>
+                          <Data value="Quais as chances?"/>
+                          <Data value="Realeza"/>
                         </Column>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object">
                           <Data value="Ganhe cinco apostas seguidas"/>
@@ -562,8 +564,12 @@
                           <Data value="Ganhe uma partida sem perder uma aposta"/>
                           <Data value="BLOQUEADO"/>
                           <Data value="BLOQUEADO"/>
+                          <Data value="Ganhe tr&#xea;s apostas apenas apostando em maior"/>
+                          <Data value="Una o rei e a rainha numa aposta"/>
                         </Column>
                         <Column editable="false" title="Obtido em" type="java.lang.Object">
+                          <Data value="-"/>
+                          <Data value="-"/>
                           <Data value="-"/>
                           <Data value="-"/>
                           <Data value="-"/>
@@ -574,7 +580,7 @@
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="40" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -584,7 +590,7 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="40" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>

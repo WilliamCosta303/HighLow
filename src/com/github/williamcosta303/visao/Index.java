@@ -12,7 +12,7 @@ import javax.swing.filechooser.*;
 //import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
-    Copyright (c) 2016, William A. Costa
+    Copyright (c) 2016-2017, William A. Costa
     All rights reserved.
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are met:
@@ -47,6 +47,7 @@ public class Index extends javax.swing.JFrame {
     boolean manteveApostaOriginal = true;
     boolean perdeuUmaAposta = false;
     int vitoriasSeguidas = 0;
+    int vitoriasSeguidasMaior = 0;
     int cliquesNoRosto = 0;
     
     public Index() {
@@ -361,7 +362,9 @@ public class Index extends javax.swing.JFrame {
                 {"Confio no que tenho", "Ganhe uma partida sem alterar o valor da aposta", "-"},
                 {"Casado com a sorte", "Ganhe uma partida sem perder uma aposta", "-"},
                 {"Ator da televisão", "BLOQUEADO", "-"},
-                {"Nem começou ainda", "BLOQUEADO", "-"}
+                {"Nem começou ainda", "BLOQUEADO", "-"},
+                {"Quais as chances?", "Ganhe três apostas apenas apostando em maior", "-"},
+                {"Realeza", "Una o rei e a rainha numa aposta", "-"}
             },
             new String [] {
                 "Nome", "Descrição", "Obtido em"
@@ -379,8 +382,10 @@ public class Index extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tConquistas);
         if (tConquistas.getColumnModel().getColumnCount() > 0) {
             tConquistas.getColumnModel().getColumn(0).setResizable(false);
+            tConquistas.getColumnModel().getColumn(0).setPreferredWidth(40);
             tConquistas.getColumnModel().getColumn(1).setResizable(false);
             tConquistas.getColumnModel().getColumn(2).setResizable(false);
+            tConquistas.getColumnModel().getColumn(2).setPreferredWidth(40);
         }
 
         jButton1.setText("Ver conquista");
@@ -497,6 +502,7 @@ public class Index extends javax.swing.JFrame {
             
             // Conquistas
             this.vitoriasSeguidas++;
+            this.vitoriasSeguidasMaior++;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
@@ -511,6 +517,7 @@ public class Index extends javax.swing.JFrame {
             
             // Conquistas
             this.vitoriasSeguidas = 0;
+            this.vitoriasSeguidasMaior = 0;
             this.perdeuUmaAposta = true;
             
             // Estranho
@@ -533,6 +540,7 @@ public class Index extends javax.swing.JFrame {
         
         // Conquistas
         this.verificaVitoriasSeguidas();
+        this.verificaRealeza();
         
         this.atualizarDinheiros();
         this.verificaVitoria();
@@ -547,6 +555,7 @@ public class Index extends javax.swing.JFrame {
             
             // Conquistas
             this.vitoriasSeguidas++;
+            this.vitoriasSeguidasMaior = 0;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
@@ -561,6 +570,7 @@ public class Index extends javax.swing.JFrame {
             
             // Conquistas
             this.vitoriasSeguidas = 0;
+            this.vitoriasSeguidasMaior = 0;
             this.perdeuUmaAposta = true;
             
             // Estranho
@@ -583,6 +593,7 @@ public class Index extends javax.swing.JFrame {
         
         // Conquistas
         this.verificaVitoriasSeguidas();
+        this.verificaRealeza();
         
         this.atualizarDinheiros();
         this.verificaVitoria();
@@ -613,7 +624,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170216.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170220.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -640,6 +651,10 @@ public class Index extends javax.swing.JFrame {
         12 - Horário conquista 3 (Casado com a sorte)
         13 - Horário conquista 4 (Ator da televisão)
         14 - Horário conquista 5 (Nem começou ainda)
+        15 - Horário conquista 6 (Quais as chances?)
+        16 - Horário conquista 7 (Realeza)
+        17 - manteveApostaOriginal
+        18 - perdeuUmaAposta
         */
         try{
             // Janela para salvar arquivo
@@ -664,7 +679,9 @@ public class Index extends javax.swing.JFrame {
                             + cartaAnterior[1] + "," + dinheiro + "," + valorAposta + "," + dinheiroInimigo + ","
                             + multiplicador + "," + E.getNome() + "," + tConquistas.getValueAt(0, 2) + ","
                             + tConquistas.getValueAt(1, 2) + "," + tConquistas.getValueAt(2, 2) + ","
-                            + tConquistas.getValueAt(3, 2) + "," + tConquistas.getValueAt(4, 2);
+                            + tConquistas.getValueAt(3, 2) + "," + tConquistas.getValueAt(4, 2) + ","
+                            + tConquistas.getValueAt(5, 2) + "," + tConquistas.getValueAt(6, 2) + ","
+                            + manteveApostaOriginal + "," + perdeuUmaAposta;
                     A.salvarArquivo(tmp, conteudo);
                     JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -714,6 +731,10 @@ public class Index extends javax.swing.JFrame {
                 if(!conteudo[13].equals("-")){
                     this.tConquistas.setValueAt("Clique na carta anterior antes do jogo começar", 4, 1);
                 }
+                this.tConquistas.setValueAt(conteudo[14], 5, 2);
+                this.tConquistas.setValueAt(conteudo[15], 6, 2);
+                this.manteveApostaOriginal = Boolean.parseBoolean(conteudo[16]);
+                this.perdeuUmaAposta = Boolean.parseBoolean(conteudo[17]);
                 
                 // Atualiza os componentes da janela
                 this.jSlider1.setValue(valorAposta);
@@ -768,8 +789,26 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lDinheiroAtualMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int tmp = this.tConquistas.getSelectedRow();
+        if(tmp != -1){
+            JOptionPane.showMessageDialog(this, this.tConquistas.getValueAt(tmp, 0) + "\n--\nDescrição:\n" + this.tConquistas.getValueAt(tmp, 1) + "\n\nConquistado em: " + this.tConquistas.getValueAt(tmp, 2), "CONQUISTA", JOptionPane.PLAIN_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para verificar a conquista!", "AVISO", JOptionPane.WARNING_MESSAGE);
+        }
+
+        /**
+         * MÉTODOS DE BUGTEST
+         */
+        // SETAR DINHEIRO INIMIGO
         //this.dinheiroInimigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo valor de dinheiro do inimigo:", Integer.toString(this.dinheiroInimigo)));
-        System.out.println("Estado das suas conquistas:\n\nPerdeu aposta? - " + this.perdeuUmaAposta + "\nManteve a aposta de $20? - " + this.manteveApostaOriginal + "\nCliques na cara do estranho: " + this.cliquesNoRosto + "\nVitórias seguidas: " + this.vitoriasSeguidas);
+        
+        // VERIFICAR ESTADO DAS CONQUISTAS
+        //System.out.println("Estado das suas conquistas:\n\nPerdeu aposta? - " + this.perdeuUmaAposta + "\nManteve a aposta de $20? - " + this.manteveApostaOriginal + "\nCliques na cara do estranho: " + this.cliquesNoRosto + "\nVitórias seguidas: " + this.vitoriasSeguidas);
+        
+        // Alterar carta atual
+        //cartaAtual[0] = Integer.parseInt(JOptionPane.showInputDialog("Digite novo valor da carta atual:", Integer.toString(cartaAtual[0])));
+        //cartaAtual[1] = Integer.parseInt(JOptionPane.showInputDialog("Digite novo valor da carta atual:", Integer.toString(cartaAtual[1])));
+        //this.atualizarCartas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -902,12 +941,11 @@ public class Index extends javax.swing.JFrame {
         this.manteveApostaOriginal = true;
         this.perdeuUmaAposta = false;
         this.vitoriasSeguidas = 0;
+        this.vitoriasSeguidasMaior = 0;
         if(!acabouJogoAnterior){
-            this.tConquistas.setValueAt("-", 0, 2);
-            this.tConquistas.setValueAt("-", 1, 2);
-            this.tConquistas.setValueAt("-", 2, 2);
-            this.tConquistas.setValueAt("-", 3, 2);
-            this.tConquistas.setValueAt("-", 4, 2);
+            for(int i = 0; i < tConquistas.getRowCount(); i++){
+                this.tConquistas.setValueAt("-", i, 2);
+            }
         }
 
         // Atualiza os componentes da janela
@@ -981,8 +1019,19 @@ public class Index extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nALGUNS NASCEM COM SORTE!\n- Ganhe cinco apostas seguidas!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
             this.tConquistas.setValueAt(this.recebeHorario(), 0, 2);
         }
+        
+        if(vitoriasSeguidasMaior == 3 && this.tConquistas.getValueAt(5, 2).equals("-")){
+            JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nQUAIS AS CHANCES?!\n- Ganhe três apostas apenas apostando em maior!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+            this.tConquistas.setValueAt(this.recebeHorario(), 5, 2);
+        }
     }
     
+    private void verificaRealeza(){
+        if(((cartaAnterior[0] == 12 && cartaAtual[0] == 13) || (cartaAnterior[0] == 13 && cartaAtual[0] == 12)) && this.tConquistas.getValueAt(6, 2).equals("-")){
+            JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nREALEZA!\n- Una o rei e a rainha numa aposta!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
+            this.tConquistas.setValueAt(this.recebeHorario(), 6, 2);
+        }
+    }
     
     private String recebeHorario(){
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());

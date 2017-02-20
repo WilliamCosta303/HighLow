@@ -1,4 +1,4 @@
-Copyright (c) 2016, William A. Costa
+Copyright (c) 2016-2017, William A. Costa
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
