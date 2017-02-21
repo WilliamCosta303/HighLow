@@ -624,7 +624,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170220.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170221.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -785,7 +785,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_lCartaAnteriorMouseClicked
 
     private void lDinheiroAtualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lDinheiroAtualMouseClicked
-        // TODO add your handling code here:
+        this.mEstranho.setText(E.geraFalaDinheiro(this.multiplicador));
     }//GEN-LAST:event_lDinheiroAtualMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -795,20 +795,6 @@ public class Index extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione uma linha para verificar a conquista!", "AVISO", JOptionPane.WARNING_MESSAGE);
         }
-
-        /**
-         * MÉTODOS DE BUGTEST
-         */
-        // SETAR DINHEIRO INIMIGO
-        //this.dinheiroInimigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo valor de dinheiro do inimigo:", Integer.toString(this.dinheiroInimigo)));
-        
-        // VERIFICAR ESTADO DAS CONQUISTAS
-        //System.out.println("Estado das suas conquistas:\n\nPerdeu aposta? - " + this.perdeuUmaAposta + "\nManteve a aposta de $20? - " + this.manteveApostaOriginal + "\nCliques na cara do estranho: " + this.cliquesNoRosto + "\nVitórias seguidas: " + this.vitoriasSeguidas);
-        
-        // Alterar carta atual
-        //cartaAtual[0] = Integer.parseInt(JOptionPane.showInputDialog("Digite novo valor da carta atual:", Integer.toString(cartaAtual[0])));
-        //cartaAtual[1] = Integer.parseInt(JOptionPane.showInputDialog("Digite novo valor da carta atual:", Integer.toString(cartaAtual[1])));
-        //this.atualizarCartas();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

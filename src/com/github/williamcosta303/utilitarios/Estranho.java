@@ -322,6 +322,39 @@ public class Estranho {
         }
     }
     
+    public String geraFalaDinheiro(int estresse){
+        int mensagemEscolhida = geraNumeroAleatorio(3);
+        switch(estresse){
+            case 2:
+                switch(mensagemEscolhida){
+                    case 1:
+                        return nome + ":\n" + "Estou precisando de um dinheirinho extra.";
+                    case 2:
+                        return nome + ":\n" + "Você não tem muito, mas já me ajuda.";
+                    default:
+                        return nome + ":\n" + "Qualquer poquinho já ME ajuda.";
+                }
+            case 3:
+                switch(mensagemEscolhida){
+                    case 1:
+                        return nome + ":\n" + "Preciso do meu dinheiro de volta.";
+                    case 2:
+                        return nome + ":\n" + "Vou pegar meu dinheiro de volta aos poucos.";
+                    default:
+                        return nome + ":\n" + "Estou deixando você achar que vai ganhar.";
+                }
+            default:
+                switch(mensagemEscolhida){
+                    case 1:
+                        return nome + ":\n" + "Agora é sério, vou pegar tudo de volta.";
+                    case 2:
+                        return nome + ":\n" + "Vou pegar o meu dinheiro, o seu e você vai ficar me devendo!";
+                    default:
+                        return nome + ":\n" + "Devolva meu dinheiro, aposte mais!";
+                }
+        }
+    }
+    
     public String geraFalaGenerica(String mensagem){
         return nome + ":\n" + mensagem;
     }
