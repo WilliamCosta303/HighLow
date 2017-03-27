@@ -50,6 +50,9 @@ public class Index extends javax.swing.JFrame {
     int vitoriasSeguidasMaior = 0;
     int cliquesNoRosto = 0;
     
+    // Estatísticas
+    int vitorias = 0, derrotas = 0, apostasGanhas = 0, apostasPerdidas = 0, apostasEmpatadas = 0, apostasMaior = 0, apostasMenor = 0, dinheiroGanho = 0, dinheiroPerdido = 0;
+    
     public Index() {
         initComponents();
         this.sorteiaUmaCarta(true);
@@ -71,7 +74,7 @@ public class Index extends javax.swing.JFrame {
         lCartaAnterior = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        pJogo = new javax.swing.JPanel();
         painelDinheiro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lDinheiroAtual = new javax.swing.JLabel();
@@ -88,10 +91,29 @@ public class Index extends javax.swing.JFrame {
         lMultiplicador = new javax.swing.JLabel();
         bApostarMais = new javax.swing.JButton();
         bApostarMenos = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pConquistas = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tConquistas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        pEstatisticas = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        lEstVitorias = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lEstDerrotas = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        lEstApostasMaior = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lEstApostasMenor = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lEstApostasGanhas = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lEstApostasPerdidas = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        lEstDinheiroGanho = new javax.swing.JLabel();
+        lEstDinheiroPerdido = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lEstApostasEmpatadas = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mJogoNovo = new javax.swing.JMenuItem();
@@ -323,30 +345,30 @@ public class Index extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pJogoLayout = new javax.swing.GroupLayout(pJogo);
+        pJogo.setLayout(pJogoLayout);
+        pJogoLayout.setHorizontalGroup(
+            pJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pJogoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(painelDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bApostarMais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bApostarMenos, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(painelEstranho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pJogoLayout.setVerticalGroup(
+            pJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pJogoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pJogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelEstranho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(pJogoLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(bApostarMais)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,7 +376,7 @@ public class Index extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Jogo", jPanel1);
+        jTabbedPane1.addTab("Jogo", new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/ic-jogo-16.png")), pJogo); // NOI18N
 
         tConquistas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -395,22 +417,22 @@ public class Index extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout pConquistasLayout = new javax.swing.GroupLayout(pConquistas);
+        pConquistas.setLayout(pConquistasLayout);
+        pConquistasLayout.setHorizontalGroup(
+            pConquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pConquistasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pConquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(pConquistasLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pConquistasLayout.setVerticalGroup(
+            pConquistasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pConquistasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -418,7 +440,147 @@ public class Index extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Conquitas", jPanel2);
+        jTabbedPane1.addTab("Conquitas", new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/ic-conquistas-16.png")), pConquistas); // NOI18N
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Vitórias: ");
+
+        lEstVitorias.setText("0");
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Derrotas: ");
+
+        lEstDerrotas.setText("0");
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Apostas em maior: ");
+
+        lEstApostasMaior.setText("0");
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Apostas em menor: ");
+
+        lEstApostasMenor.setText("0");
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("Apostas ganhas: ");
+
+        lEstApostasGanhas.setText("0");
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText("Apostas perdidas: ");
+
+        lEstApostasPerdidas.setText("0");
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Dinheiro ganho: $");
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("Dinheiro perdido: $");
+
+        lEstDinheiroGanho.setText("0");
+
+        lEstDinheiroPerdido.setText("0");
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Apostas empatadas: ");
+
+        lEstApostasEmpatadas.setText("0");
+
+        javax.swing.GroupLayout pEstatisticasLayout = new javax.swing.GroupLayout(pEstatisticas);
+        pEstatisticas.setLayout(pEstatisticasLayout);
+        pEstatisticasLayout.setHorizontalGroup(
+            pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lEstApostasMaior, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lEstApostasMenor, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lEstApostasGanhas, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lEstApostasPerdidas, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lEstVitorias, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lEstDerrotas, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lEstDinheiroGanho, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lEstDinheiroPerdido, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lEstApostasEmpatadas, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        pEstatisticasLayout.setVerticalGroup(
+            pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEstatisticasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(lEstVitorias))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(lEstDerrotas)))
+                    .addGroup(pEstatisticasLayout.createSequentialGroup()
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(lEstDinheiroGanho))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel22)
+                            .addComponent(lEstDinheiroPerdido))))
+                .addGap(18, 18, 18)
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(lEstApostasGanhas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(lEstApostasPerdidas))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(lEstApostasEmpatadas))
+                .addGap(18, 18, 18)
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(lEstApostasMaior))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(lEstApostasMenor))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Estatísticas", new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/ic-estatisticas-16.png")), pEstatisticas); // NOI18N
 
         jMenu1.setText("Jogo");
 
@@ -494,6 +656,9 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void bApostarMaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bApostarMaisActionPerformed
+        // Estatísticas
+        this.apostasMaior++;
+        
         this.sorteiaUmaCarta(false);
         if(cartaAtual[0] > cartaAnterior[0]){
             // GANHOU
@@ -503,6 +668,10 @@ public class Index extends javax.swing.JFrame {
             // Conquistas
             this.vitoriasSeguidas++;
             this.vitoriasSeguidasMaior++;
+            
+            // Estatísticas
+            this.apostasGanhas++;
+            this.dinheiroGanho+= this.valorAposta;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
@@ -520,6 +689,10 @@ public class Index extends javax.swing.JFrame {
             this.vitoriasSeguidasMaior = 0;
             this.perdeuUmaAposta = true;
             
+            // Estatísticas
+            this.apostasPerdidas++;
+            this.dinheiroPerdido+= this.valorAposta * multiplicador;
+            
             // Estranho
             this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
@@ -529,6 +702,9 @@ public class Index extends javax.swing.JFrame {
         } else {
             // EMPATE
             this.vitoriasSeguidas = 0;
+            
+            // Estatísticas
+            this.apostasEmpatadas++;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
@@ -544,9 +720,15 @@ public class Index extends javax.swing.JFrame {
         
         this.atualizarDinheiros();
         this.verificaVitoria();
+        
+        // Estatísticas
+        this.atualizaCamposEstatisticas();
     }//GEN-LAST:event_bApostarMaisActionPerformed
 
     private void bApostarMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bApostarMenosActionPerformed
+        // Estatísticas
+        this.apostasMenor++;
+        
         this.sorteiaUmaCarta(false);
         if(cartaAtual[0] < cartaAnterior[0]){
             // GANHOU
@@ -556,6 +738,10 @@ public class Index extends javax.swing.JFrame {
             // Conquistas
             this.vitoriasSeguidas++;
             this.vitoriasSeguidasMaior = 0;
+            
+            // Estatísticas
+            this.apostasGanhas++;
+            this.dinheiroGanho+= this.valorAposta;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaVitoria(this.multiplicador));
@@ -573,6 +759,10 @@ public class Index extends javax.swing.JFrame {
             this.vitoriasSeguidasMaior = 0;
             this.perdeuUmaAposta = true;
             
+            // Estatísticas
+            this.apostasPerdidas++;
+            this.dinheiroPerdido+= this.valorAposta * multiplicador;
+            
             // Estranho
             this.mEstranho.setText(E.geraFalaDerrota(this.multiplicador));
             this.verificaAlteracaoMultiplicador();
@@ -582,6 +772,9 @@ public class Index extends javax.swing.JFrame {
         } else {
             // EMPATE
             this.vitoriasSeguidas = 0;
+            
+            // Estatísticas
+            this.apostasEmpatadas++;
             
             // Estranho
             this.mEstranho.setText(E.geraFalaEmpate(this.multiplicador));
@@ -597,6 +790,9 @@ public class Index extends javax.swing.JFrame {
         
         this.atualizarDinheiros();
         this.verificaVitoria();
+        
+        // Estatísticas
+        this.atualizaCamposEstatisticas();
     }//GEN-LAST:event_bApostarMenosActionPerformed
 
     private void lMultiplicadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lMultiplicadorMouseClicked
@@ -624,7 +820,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.2 (build 170221.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.3 (build 170324.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -655,6 +851,15 @@ public class Index extends javax.swing.JFrame {
         16 - Horário conquista 7 (Realeza)
         17 - manteveApostaOriginal
         18 - perdeuUmaAposta
+        19 - vitorias
+        20 - derrotas
+        21 - apostasGanhas
+        22 - apostasPerdidas
+        23 - apostasEmpatadas
+        24 - apostasMaior
+        25 - apostasMenor
+        26 - dinheiroGanho
+        27 - dinheiroPerdido
         */
         try{
             // Janela para salvar arquivo
@@ -681,7 +886,9 @@ public class Index extends javax.swing.JFrame {
                             + tConquistas.getValueAt(1, 2) + "," + tConquistas.getValueAt(2, 2) + ","
                             + tConquistas.getValueAt(3, 2) + "," + tConquistas.getValueAt(4, 2) + ","
                             + tConquistas.getValueAt(5, 2) + "," + tConquistas.getValueAt(6, 2) + ","
-                            + manteveApostaOriginal + "," + perdeuUmaAposta;
+                            + manteveApostaOriginal + "," + perdeuUmaAposta + "," + vitorias + "," + derrotas + "," 
+                            + apostasGanhas + "," + apostasPerdidas + "," + apostasEmpatadas + "," + apostasMaior + ","
+                            + apostasMenor + "," + dinheiroGanho + "," + dinheiroPerdido;
                     A.salvarArquivo(tmp, conteudo);
                     JOptionPane.showMessageDialog(this, "Jogo salvo com sucesso!", "SALVAR", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -736,6 +943,17 @@ public class Index extends javax.swing.JFrame {
                 this.manteveApostaOriginal = Boolean.parseBoolean(conteudo[16]);
                 this.perdeuUmaAposta = Boolean.parseBoolean(conteudo[17]);
                 
+                // Seta as estatísticas
+                this.vitorias = Integer.parseInt(conteudo[18]);
+                this.derrotas = Integer.parseInt(conteudo[19]);
+                this.apostasGanhas = Integer.parseInt(conteudo[20]);
+                this.apostasPerdidas = Integer.parseInt(conteudo[21]);
+                this.apostasEmpatadas = Integer.parseInt(conteudo[22]);
+                this.apostasMaior = Integer.parseInt(conteudo[23]);
+                this.apostasMenor = Integer.parseInt(conteudo[24]);
+                this.dinheiroGanho = Integer.parseInt(conteudo[25]);
+                this.dinheiroPerdido = Integer.parseInt(conteudo[26]);
+                
                 // Atualiza os componentes da janela
                 this.jSlider1.setValue(valorAposta);
                 this.lDinheiroAtual.setText(Integer.toString(dinheiro));
@@ -743,6 +961,7 @@ public class Index extends javax.swing.JFrame {
                 this.lMultiplicador.setText(Integer.toString(multiplicador));
                 this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
                 this.atualizarCartas();
+                this.atualizaCamposEstatisticas();
 
                 JOptionPane.showMessageDialog(this, "Jogo carregado com sucesso!", "ABRIR", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -762,6 +981,7 @@ public class Index extends javax.swing.JFrame {
             this.lMultiplicador.setText(Integer.toString(multiplicador));
             this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
             this.atualizarCartas();
+            this.atualizaCamposEstatisticas();
             
             JOptionPane.showMessageDialog(this, "Save antigo detectado!\nSeu jogo foi importado, da próxima vez que salvar ele será atualizado para a nova versão!", "AVISO", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -896,6 +1116,9 @@ public class Index extends javax.swing.JFrame {
     
     private void verificaVitoria(){
         if(dinheiroInimigo <= 0){
+            // Estatísticas
+            this.vitorias++;
+            
             JOptionPane.showMessageDialog(this, "Você ganhou!\nFicou com todo o dinheiro do estranho.\n\nSeu saldo final: $" + dinheiro + "\nSaldo final do estranho: $" + dinheiroInimigo, "VOCÊ VENCEU", JOptionPane.INFORMATION_MESSAGE);
             if(this.manteveApostaOriginal && this.tConquistas.getValueAt(1, 2).equals("-")){
                 JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\nCONFIO NO QUE TENHO!\n- Ganhe uma partida sem alterar o valor da aposta!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
@@ -907,6 +1130,9 @@ public class Index extends javax.swing.JFrame {
             }
             this.iniciarNovoJogo(true);
         } else if(dinheiro <= 0){
+            // Estatísticas
+            this.derrotas++;
+            
             JOptionPane.showMessageDialog(this, "Você perdeu!\nO estranho ficou com todo o seu dinheiro.\n\nSeu saldo final: $" + dinheiro + "\nSaldo final do estranho: $" + dinheiroInimigo, "VOCÊ PERDEU", JOptionPane.WARNING_MESSAGE);
             this.iniciarNovoJogo(true);
         }
@@ -933,6 +1159,19 @@ public class Index extends javax.swing.JFrame {
                 this.tConquistas.setValueAt("-", i, 2);
             }
         }
+        
+        if(!acabouJogoAnterior){
+            // Reseta as estatísticas
+            this.vitorias = 0;
+            this.derrotas = 0;
+            this.apostasGanhas = 0;
+            this.apostasPerdidas = 0;
+            this.apostasEmpatadas = 0;
+            this.apostasMaior = 0;
+            this.apostasMenor = 0;
+            this.dinheiroGanho = 0;
+            this.dinheiroPerdido = 0;
+        }
 
         // Atualiza os componentes da janela
         this.jSlider1.setValue(valorAposta);
@@ -940,6 +1179,7 @@ public class Index extends javax.swing.JFrame {
         this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
         this.lMultiplicador.setText(Integer.toString(multiplicador));
         this.mEstranho.setText(E.geraFalaInicio());
+        this.atualizaCamposEstatisticas();
 
         // Reseta o ícone da carta anterior
         lCartaAnterior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/none.png")));
@@ -1023,6 +1263,22 @@ public class Index extends javax.swing.JFrame {
         return new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
     }
     
+    /*
+        Métodos das estatísticas
+    */
+    
+    private void atualizaCamposEstatisticas(){
+        this.lEstApostasGanhas.setText(Integer.toString(this.apostasGanhas));
+        this.lEstApostasMaior.setText(Integer.toString(this.apostasMaior));
+        this.lEstApostasMenor.setText(Integer.toString(this.apostasMenor));
+        this.lEstApostasEmpatadas.setText(Integer.toString(this.apostasEmpatadas));
+        this.lEstApostasPerdidas.setText(Integer.toString(this.apostasPerdidas));
+        this.lEstDerrotas.setText(Integer.toString(this.derrotas));
+        this.lEstDinheiroGanho.setText(Integer.toString(this.dinheiroGanho));
+        this.lEstDinheiroPerdido.setText(Integer.toString(this.dinheiroPerdido));
+        this.lEstVitorias.setText(Integer.toString(this.vitorias));
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bApostarMais;
@@ -1030,18 +1286,25 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSlider1;
@@ -1050,12 +1313,24 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel lCartaAtual;
     private javax.swing.JLabel lDinheiroAtual;
     private javax.swing.JLabel lDinheiroInimigo;
+    private javax.swing.JLabel lEstApostasEmpatadas;
+    private javax.swing.JLabel lEstApostasGanhas;
+    private javax.swing.JLabel lEstApostasMaior;
+    private javax.swing.JLabel lEstApostasMenor;
+    private javax.swing.JLabel lEstApostasPerdidas;
+    private javax.swing.JLabel lEstDerrotas;
+    private javax.swing.JLabel lEstDinheiroGanho;
+    private javax.swing.JLabel lEstDinheiroPerdido;
+    private javax.swing.JLabel lEstVitorias;
     private javax.swing.JLabel lMultiplicador;
     private javax.swing.JMenuItem mAjudaSobre;
     private javax.swing.JTextArea mEstranho;
     private javax.swing.JMenuItem mJogoAbrir;
     private javax.swing.JMenuItem mJogoNovo;
     private javax.swing.JMenuItem mJogoSalvar;
+    private javax.swing.JPanel pConquistas;
+    private javax.swing.JPanel pEstatisticas;
+    private javax.swing.JPanel pJogo;
     private javax.swing.JPanel painelCartas;
     private javax.swing.JPanel painelDinheiro;
     private javax.swing.JPanel painelEstranho;
