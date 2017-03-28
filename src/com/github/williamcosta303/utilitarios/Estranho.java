@@ -247,7 +247,7 @@ public class Estranho {
                     case 2:
                         return nome + ":\nQue demora tenho que ganhar essa desgraça.";
                     case 3:
-                        return nome + ":\nEnquanto você saia a sorte voltou veio para mim.";
+                        return nome + ":\nEnquanto você saia a sorte voltou para mim.";
                     default:
                         return nome + ":\nBUG";
                 }

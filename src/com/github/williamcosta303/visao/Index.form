@@ -524,7 +524,7 @@
                           <Component id="jScrollPane2" pref="696" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="139" max="-2" attributes="0"/>
+                              <Component id="bVerConquista" min="-2" pref="139" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -537,7 +537,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="149" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="bVerConquista" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -554,7 +554,7 @@
                 <Component class="javax.swing.JTable" name="tConquistas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="7">
+                      <Table columnCount="3" rowCount="10">
                         <Column editable="false" title="Nome" type="java.lang.Object">
                           <Data value="Alguns nascem com sorte"/>
                           <Data value="Confio no que tenho"/>
@@ -563,6 +563,9 @@
                           <Data value="Nem come&#xe7;ou ainda"/>
                           <Data value="Quais as chances?"/>
                           <Data value="Realeza"/>
+                          <Data value="Dinheiro f&#xe1;cil"/>
+                          <Data value="Fal&#xea;ncia"/>
+                          <Data value="7 da sorte"/>
                         </Column>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object">
                           <Data value="Ganhe cinco apostas seguidas"/>
@@ -572,8 +575,14 @@
                           <Data value="BLOQUEADO"/>
                           <Data value="Ganhe tr&#xea;s apostas apenas apostando em maior"/>
                           <Data value="Una o rei e a rainha numa aposta"/>
+                          <Data value="Tire um &#xe1;s quando tiver um rei no jogo, ou vice versa"/>
+                          <Data value="Ganhe uma partida, deixando o inimigo com saldo negativo maior que $20"/>
+                          <Data value="Aposte o maior valor quando tiver um sete na mesa e ganhe a aposta"/>
                         </Column>
                         <Column editable="false" title="Obtido em" type="java.lang.Object">
+                          <Data value="-"/>
+                          <Data value="-"/>
+                          <Data value="-"/>
                           <Data value="-"/>
                           <Data value="-"/>
                           <Data value="-"/>
@@ -610,12 +619,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="bVerConquista">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver conquista"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bVerConquistaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
