@@ -82,7 +82,7 @@ public class Index extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jSlider1 = new javax.swing.JSlider();
         painelEstranho = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lRostoEstranho = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mEstranho = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
@@ -245,10 +245,10 @@ public class Index extends javax.swing.JFrame {
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/shadyguy.png"))); // NOI18N
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        lRostoEstranho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/github/williamcosta303/imagens/shadyguy.png"))); // NOI18N
+        lRostoEstranho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                lRostoEstranhoMouseClicked(evt);
             }
         });
 
@@ -306,7 +306,7 @@ public class Index extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lDinheiroInimigo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lRostoEstranho, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         painelEstranhoLayout.setVerticalGroup(
@@ -325,7 +325,7 @@ public class Index extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lMultiplicador))
                         .addGap(13, 13, 13))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lRostoEstranho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -816,7 +816,7 @@ public class Index extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lDinheiroInimigoMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void lRostoEstranhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lRostoEstranhoMouseClicked
         if(this.cliquesNoRosto == 6 && this.tConquistas.getValueAt(3, 2).equals("-")){
             this.mEstranho.setText(E.geraFalaGenerica("Eu sei, meu rosto é irresistível!"));
             JOptionPane.showMessageDialog(this, "Você conseguiu a conquista:\n\nATOR DA TELEVISÃO!\n- Clique no rosto do inimigo sete vezes!", "CONQUISTA LIBERADA", JOptionPane.INFORMATION_MESSAGE);
@@ -826,10 +826,10 @@ public class Index extends javax.swing.JFrame {
             this.mEstranho.setText(E.geraFalaGenerica("Meu lindo rosto, eu deveria estar na televisão!"));
             this.cliquesNoRosto++;
         }
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_lRostoEstranhoMouseClicked
 
     private void mAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mAjudaSobreActionPerformed
-        JOptionPane.showMessageDialog(this, "Maior-menor\n2.3 (build 170328.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Maior-menor\n2.3 (build 170330.1)\n\nCriado por: William A. Costa\nhttps://github.com/williamcosta303", "SOBRE", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_mAjudaSobreActionPerformed
 
     private void mJogoNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoNovoActionPerformed
@@ -918,7 +918,7 @@ public class Index extends javax.swing.JFrame {
     }//GEN-LAST:event_mJogoSalvarActionPerformed
 
     private void mJogoAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mJogoAbrirActionPerformed
-        boolean carregaInicial = false, carregaV21 = false, carregaV22 = false, carregaV23 = false;
+        boolean carregaV21 = false, carregaV22 = false, carregaV23 = false;
         try{
             // Janela para abrir arquivo
             File workingDirectory = new File(System.getProperty("user.dir") + "\\saves");
@@ -939,9 +939,6 @@ public class Index extends javax.swing.JFrame {
                 valorAposta = Integer.parseInt(conteudo[5]);
                 dinheiroInimigo = Integer.parseInt(conteudo[6]);
                 multiplicador = Integer.parseInt(conteudo[7]);
-                // Flag para fim de carregamento da V2.0
-                carregaInicial = true;
-                
                 
                 E.setNome(conteudo[8]);
                 // Flag para fim de carregamento da V2.1
@@ -1005,12 +1002,13 @@ public class Index extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Esse arquivo não é considerado um save válido!\nTente outro arquivo.", "ERRO", JOptionPane.ERROR_MESSAGE);
         } catch(ArrayIndexOutOfBoundsException AE){
             // Verifica o que faltou carregar e zela os valores
+            boolean isSaveAntigo = false;
+            
            if(!carregaV21){
-               //NÃO SEI
+               this.mEstranho.setText(E.geraFalaCarregouAntigo());
+               isSaveAntigo = true;
            }
            if(!carregaV22){
-               System.out.println("Não carregou a versão 2.2");
-               
                for(int i = 0; i < 7; i++){
                    this.tConquistas.setValueAt("-", i, 2);
                }
@@ -1023,8 +1021,6 @@ public class Index extends javax.swing.JFrame {
                this.cliquesNoRosto = 0;
            }
            if(!carregaV23){
-               System.out.println("Não carregou a versão 2.3");
-               
                this.vitorias = 0;
                this.derrotas = 0;
                this.apostasGanhas = 0;
@@ -1042,7 +1038,9 @@ public class Index extends javax.swing.JFrame {
             this.lDinheiroAtual.setText(Integer.toString(dinheiro));
             this.lDinheiroInimigo.setText(Integer.toString(dinheiroInimigo));
             this.lMultiplicador.setText(Integer.toString(multiplicador));
-            this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
+            if(!isSaveAntigo){
+                this.mEstranho.setText(E.geraFalaCarregou(this.multiplicador));
+            }
             this.atualizarCartas();
             this.atualizaCamposEstatisticas();
             
@@ -1224,12 +1222,15 @@ public class Index extends javax.swing.JFrame {
         this.vitoriasSeguidas = 0;
         this.vitoriasSeguidasMaior = 0;
         if(!acabouJogoAnterior){
+            // SE NÃO ACABOU O JOGO ANTERIOR (AKA: INICIOU NOVO JOGO NO MENU)
+            
+            // Reseta as conquistas
             for(int i = 0; i < tConquistas.getRowCount(); i++){
                 this.tConquistas.setValueAt("-", i, 2);
             }
-        }
-        
-        if(!acabouJogoAnterior){
+            this.tConquistas.setValueAt("BLOQUEADO", 3, 1);
+            this.tConquistas.setValueAt("BLOQUEADO", 4, 1);
+            
             // Reseta as estatísticas
             this.vitorias = 0;
             this.derrotas = 0;
@@ -1378,7 +1379,6 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1403,6 +1403,7 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel lEstDinheiroPerdido;
     private javax.swing.JLabel lEstVitorias;
     private javax.swing.JLabel lMultiplicador;
+    private javax.swing.JLabel lRostoEstranho;
     private javax.swing.JMenuItem mAjudaSobre;
     private javax.swing.JTextArea mEstranho;
     private javax.swing.JMenuItem mJogoAbrir;

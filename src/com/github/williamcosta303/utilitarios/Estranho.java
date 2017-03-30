@@ -215,6 +215,21 @@ public class Estranho {
         }
     }
     
+    public String geraFalaCarregouAntigo(){
+        int mensagemEscolhida = geraNumeroAleatorio(3);
+        this.setaNomeAleatorio();
+        switch(mensagemEscolhida){
+            case 1:
+                return nome + ":\nConheço você de outras épocas.";
+            case 2:
+                return nome + ":\nVeio jogar de novo comigo?";
+            case 3:
+                return nome + ":\nFaz tempo, vamos jogar de novo?";
+            default:
+                return nome + ":\nBUG";
+        }
+    }
+    
     public String geraFalaCarregou(int estresse){
         int mensagemEscolhida = geraNumeroAleatorio(3);
         switch(estresse){
